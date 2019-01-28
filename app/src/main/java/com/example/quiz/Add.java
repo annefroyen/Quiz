@@ -1,32 +1,13 @@
 package com.example.quiz;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class Add extends AppCompatActivity {
 
@@ -36,7 +17,6 @@ public class Add extends AppCompatActivity {
 
     Database database = new Database();
     int [] image_list = database.getImage_list();
-    public static final int GET_FROM_GALLERY = 3;
     int RC_PHOTO_PICKER =1;
 
     @Override
@@ -58,7 +38,7 @@ public class Add extends AppCompatActivity {
             @Override
             public void onClick(View view) {
             String name = editName.getText().toString();
-           // image_list.add(name);
+            //saveImagePerson(name, image);
 
             }
         });
@@ -70,32 +50,6 @@ public class Add extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-
-    //@Override
-  //  protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-       // if (requestCode == SELECT_PHOTO) {
-
-           // if (resultCode == RESULT_OK) {
-             //   if (intent != null) {
-               //     // Get the URI of the selected file
-               //     final Uri uri = intent.getData();
-               //     useImage(uri);
-               // }
-          //  }
-          //  super.onActivityResult(requestCode, resultCode, intent);v
-      //  }
-    //}
-
-
-
-
-    void useImage(Uri uri)
-    {
-        //Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-        //use the bitmap as you like
-        ///imageView.setImageBitmap(bitmap);
     }
 
     private void init() {
@@ -123,8 +77,8 @@ public class Add extends AppCompatActivity {
         }
     }
 
-    private void savePerson(String name, ImageView v){
+   // private void savePerson(String name, ImageView v){
         //add_imageView.getImage();
         //image.renameTo(name);
-    }
+    //}
 }
