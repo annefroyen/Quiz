@@ -26,7 +26,7 @@ public class Database extends AppCompatActivity {
     public Button prevButton;
     public Button exitButton;
     public Button deleteButton;
-    public ImageView userImage;
+    public ImageView iv_image;
     public TextView tv_name;
     String name;
     int i = 0;
@@ -49,7 +49,7 @@ public class Database extends AppCompatActivity {
         deleteButton = (Button) findViewById(R.id.deleteButton);
         prevButton = (Button) findViewById(R.id.prevButton);
         tv_name = (TextView) findViewById(R.id.tv_name);
-        userImage = (ImageView)findViewById(R.id.userImage);
+        iv_image = (ImageView)findViewById(R.id.iv_image);
 
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,13 +79,17 @@ public class Database extends AppCompatActivity {
     }
 
     private void initView() {
-        setupList(i);
+        setupList(0);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                i++;
-                    setupList(i);
+               i++;
+               if(i > image_list.length-1) {
+                   i=0;
+               }
+               setupList(i);
+
             }
         });
 
@@ -93,6 +97,9 @@ public class Database extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i--;
+                if(i < 0) {
+                    i=image_list.length-1;
+                }
                 setupList(i);
             }
         });
@@ -101,11 +108,18 @@ public class Database extends AppCompatActivity {
 
     private void setupList(int i) {
         int imageSelected = image_list[i];
-        userImage.setImageResource(imageSelected);
+        iv_image.setImageResource(imageSelected);
 
-        name = getResources().getResourceName(imageSelected);
+        name = getResources().getResourceEntryName(imageSelected);
         tv_name.setText(name);
-
     }
+
+   // private lengthProblem(int i) {
+       // int size = image_list.length;
+       // if(i > (size-1) || i < 0){
+         //   return true;
+        //}
+       //// return false;
+    //}
 
 }
