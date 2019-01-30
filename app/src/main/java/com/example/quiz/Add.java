@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Add extends AppCompatActivity {
 
@@ -15,9 +17,27 @@ public class Add extends AppCompatActivity {
     Button captureButton, cancelButton, saveButton;
     EditText editName;
 
-    Database database = new Database();
-    int [] image_list = database.getImage_list();
+    //Database database = new Database();
+   // ArrayList<Person> personList = database.getPersonList();
+   // int [] image_list = database.getImage_list();
+
+    Person person;
     int RC_PHOTO_PICKER =1;
+
+    public Add(Person person){
+        this.person=person;
+    }
+
+    private Person newPerson;
+    private String name;
+    private Uri uri;
+
+    public Add() {
+    }
+
+    public Person getPerson() {
+        return person;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +56,6 @@ public class Add extends AppCompatActivity {
             }
         });
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            String name = editName.getText().toString();
-            //saveImagePerson(name, image);
-
-            }
-        });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,14 +85,30 @@ public class Add extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
+
         if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK && data != null) {
-            Uri pickedImage = data.getData();
-            add_imageView.setImageURI(pickedImage);
+            uri = data.getData();
+            add_imageView.setImageURI(uri);
+            name = editName.getText().toString();
+            newPerson = new Person(uri, name);
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    person = newPerson;
+
+                    //personList.add(newPerson);
+                }
+            });
         }
     }
 
-   // private void savePerson(String name, ImageView v){
-        //add_imageView.getImage();
-        //image.renameTo(name);
-    //}
+    private void addPerson(Person person){
+        //lagre i database
+       // personList.add(person);
+
+
+    }
+
+   // Arrays.toString(peopleList.toArray());
 }

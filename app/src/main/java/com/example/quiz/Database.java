@@ -7,12 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.net.Uri;
+import java.util.*;
 
 public class Database extends AppCompatActivity {
 
+   ArrayList<Person> personList;
 
-    int[] image_list={
+   Add add = new Add();
+
+    int[] image_list = {
             R.drawable.joey,
             R.drawable.ross,
             R.drawable.rachel,
@@ -25,13 +29,23 @@ public class Database extends AppCompatActivity {
     public Button addButton;
     public Button prevButton;
     public Button exitButton;
+
+    public ArrayList<Person> getPersonList() {
+        return personList;
+    }
+
     public Button deleteButton;
     public ImageView iv_image;
     public TextView tv_name;
     String name;
     int i = 0;
 
+    public Database(ArrayList<Person> personList) {
+        this.personList=personList;
+
+    }
     public Database() {
+
     }
 
     public int[] getImage_list() {
@@ -42,6 +56,11 @@ public class Database extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
+        personList = new ArrayList<>();
+        Database database = new Database(personList);
+        makeList();
+
+
 
         addButton = (Button) findViewById(R.id.addButton);
         nextButton = (Button) findViewById(R.id.nextButton);
@@ -49,20 +68,24 @@ public class Database extends AppCompatActivity {
         deleteButton = (Button) findViewById(R.id.deleteButton);
         prevButton = (Button) findViewById(R.id.prevButton);
         tv_name = (TextView) findViewById(R.id.tv_name);
-        iv_image = (ImageView)findViewById(R.id.iv_image);
+        iv_image = (ImageView) findViewById(R.id.iv_image);
 
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (Database.this, MainActivity.class);
+                Intent intent = new Intent(Database.this, MainActivity.class);
                 startActivity(intent);
             }
         });
 
-        deleteButton.setOnClickListener(new View.OnClickListener(){
+        deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 //DELETE PERSON
+                //image_list
+                //personList.remove()
+
+
             }
         });
 
@@ -84,11 +107,11 @@ public class Database extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               i++;
-               if(i > image_list.length-1) {
-                   i=0;
-               }
-               setupList(i);
+                i++;
+                if (i > personList.size() - 1) {
+                    i = 0;
+                }
+                setupList(i);
 
             }
         });
@@ -97,29 +120,48 @@ public class Database extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i--;
-                if(i < 0) {
-                    i=image_list.length-1;
+                if (i < 0) {
+                    i = personList.size() - 1;
                 }
                 setupList(i);
             }
         });
     }
 
-
     private void setupList(int i) {
-        int imageSelected = image_list[i];
-        iv_image.setImageResource(imageSelected);
+        //henter ut person
+       Person currentPerson =  personList.get(i);
 
-        name = getResources().getResourceEntryName(imageSelected);
+
+        //henter ut bilde
+       Uri currentUri = currentPerson.getUri();
+        iv_image.setImageURI(currentUri);
+
+
+        //henter ut navn
+        name = currentPerson.getName();
         tv_name.setText(name);
     }
 
-   // private lengthProblem(int i) {
-       // int size = image_list.length;
-       // if(i > (size-1) || i < 0){
-         //   return true;
-        //}
-       //// return false;
-    //}
+    public void makeList(){
+        //lage personer
+        Uri joeyUri = Uri.parse("android.resource://com.example.quiz/drawable/joey");
+        Person joey = new Person(joeyUri, "joey");
+
+        Uri chandlerUri = Uri.parse("android.resource://com.example.quiz/drawable/chandler");
+        Person chandler = new Person(chandlerUri, "chandler");
+
+        Uri rachelUri = Uri.parse("android.resource://com.example.quiz/drawable/rachel");
+        Person rachel = new Person(rachelUri, "rachel");
+
+        Person addPerson = add.getPerson();
+        if(addPerson != null){
+            personList.add(addPerson);
+        }
+
+       personList.add(joey);
+       personList.add(chandler);
+       personList.add(rachel);
+    }
 
 }

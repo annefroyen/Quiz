@@ -52,6 +52,8 @@ public class Quiz extends AppCompatActivity {
         initView();
     }
 
+   // Mediastore.media.getBitmap.this.getcontentResolver
+
     private void initView() {
 
         setupList();
@@ -80,6 +82,7 @@ public class Quiz extends AppCompatActivity {
         Random random = new Random();
         int imageSelected = newList[random.nextInt(newList.length)];
         userImage.setImageResource(imageSelected);
+
 
         correct_answer = getResources().getResourceName(imageSelected);
         correct_answer = correct_answer.substring(correct_answer.lastIndexOf("/")+1);
