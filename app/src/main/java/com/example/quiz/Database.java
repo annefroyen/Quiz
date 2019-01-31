@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Database extends AppCompatActivity {
 
-   ArrayList<Person> personList;
+  private static ArrayList<Person> personList;
 
    Add add = new Add();
 
@@ -40,24 +40,28 @@ public class Database extends AppCompatActivity {
     String name;
     int i = 0;
 
-    public Database(ArrayList<Person> personList) {
-        this.personList=personList;
-
-    }
     public Database() {
+        personList = new ArrayList<Person>();
 
     }
+
 
     public int[] getImage_list() {
         return image_list;
+    }
+
+    public static  boolean addPerson(Person person){
+        personList.add(person);
+        return true;
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
-        personList = new ArrayList<>();
-        Database database = new Database(personList);
+        //personList = new ArrayList<>();
+        //Database database = new Database(personList);
         makeList();
 
 
@@ -163,5 +167,4 @@ public class Database extends AppCompatActivity {
        personList.add(chandler);
        personList.add(rachel);
     }
-
 }

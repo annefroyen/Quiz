@@ -1,6 +1,7 @@
 package com.example.quiz;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -80,6 +81,22 @@ public class Quiz extends AppCompatActivity {
 
     private void setupList() {
         Random random = new Random();
+
+
+
+        //henter ut person
+       // Person currentPerson =  personList.get(random);
+
+
+        //henter ut bilde
+        //Uri currentUri = currentPerson.getUri();
+       // iv_image.setImageURI(currentUri);
+
+
+        //henter ut navn
+        //name = currentPerson.getName();
+        //tv_name.setText(name);
+
         int imageSelected = newList[random.nextInt(newList.length)];
         userImage.setImageResource(imageSelected);
 

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,6 +18,7 @@ public class Add extends AppCompatActivity {
     ImageView add_imageView;
     Button captureButton, cancelButton, saveButton;
     EditText editName;
+    TextView sjekk;
 
     //Database database = new Database();
    // ArrayList<Person> personList = database.getPersonList();
@@ -64,6 +67,8 @@ public class Add extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     private void init() {
@@ -72,6 +77,7 @@ public class Add extends AppCompatActivity {
         cancelButton = (Button) findViewById(R.id.cancelButton);
         saveButton = (Button) findViewById(R.id.saveButton);
         editName = (EditText) findViewById(R.id.editName);
+        sjekk = (TextView) findViewById(R.id.sjekk);
     }
 
     private void openPhotoPicker() {
@@ -84,31 +90,22 @@ public class Add extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
-
         if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK && data != null) {
+
             uri = data.getData();
             add_imageView.setImageURI(uri);
-            name = editName.getText().toString();
-            newPerson = new Person(uri, name);
+
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    person = newPerson;
 
-                    //personList.add(newPerson);
+
+                    name = editName.getText().toString();
+                    newPerson = new Person(uri, name);
+                    sjekk.setText("ny person: "+ name + uri);
+                   Database.addPerson(newPerson);
                 }
             });
         }
     }
-
-    private void addPerson(Person person){
-        //lagre i database
-       // personList.add(person);
-
-
-    }
-
-   // Arrays.toString(peopleList.toArray());
 }
