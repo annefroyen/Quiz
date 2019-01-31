@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.*;
 import java.util.Random;
 
 public class Quiz extends AppCompatActivity {
@@ -24,9 +25,12 @@ public class Quiz extends AppCompatActivity {
     public TextView tv_score;
     public ImageView userImage;
 
-    Database database = new Database();
+   // Data data = new Data();
+    //data.makeList();
 
-    int [] newList = database.getImage_list();
+    //ArrayList<Person> personList = data.getPersonList();
+   // System.out.println(personList.size());
+
 
     public char[] answer;
     String correct_answer;
@@ -56,8 +60,9 @@ public class Quiz extends AppCompatActivity {
    // Mediastore.media.getBitmap.this.getcontentResolver
 
     private void initView() {
+       // Toast.makeText(getApplicationContext(), personList.size(), Toast.LENGTH_LONG).show();
 
-        setupList();
+       // setupList();
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +72,7 @@ public class Quiz extends AppCompatActivity {
                   total++;
                   Toast.makeText(getApplicationContext(),"Correct!",Toast.LENGTH_SHORT).show();
                   tv_score.setText(score + "/" + total);
-                  setupList();
+                  //setupList();
 
                 }else {
                     total++;
@@ -82,36 +87,32 @@ public class Quiz extends AppCompatActivity {
     private void setupList() {
         Random random = new Random();
 
-
-
         //henter ut person
-       // Person currentPerson =  personList.get(random);
+        // int index = random.nextInt(personList.size());
+
+        // Person currentPerson = personList.get(1);
+
+       // Toast.makeText(getApplicationContext(), personList.size(), Toast.LENGTH_LONG).show();
 
 
         //henter ut bilde
-        //Uri currentUri = currentPerson.getUri();
-       // iv_image.setImageURI(currentUri);
+        // Uri currentUri = currentPerson.getUri();
+        // userImage.setImageURI(currentUri);
 
+        //henter navn
+       // String name = currentPerson.getName();
+       // correct_answer = name;
 
-        //henter ut navn
-        //name = currentPerson.getName();
-        //tv_name.setText(name);
+       // correct_answer = correct_answer.substring(correct_answer.lastIndexOf("/")+1);
 
-        int imageSelected = newList[random.nextInt(newList.length)];
-        userImage.setImageResource(imageSelected);
+       // answer = correct_answer.toCharArray();
 
-
-        correct_answer = getResources().getResourceName(imageSelected);
-        correct_answer = correct_answer.substring(correct_answer.lastIndexOf("/")+1);
-
-        answer = correct_answer.toCharArray();
-
-        suggestSource.clear();
-        for(char item:answer)
-        {
-            suggestSource.add(String.valueOf(item));
-        }
-        Collections.shuffle(suggestSource);
+       // suggestSource.clear();
+       // for(char item:answer)
+       // {
+       //     suggestSource.add(String.valueOf(item));
+       // }
+       // Collections.shuffle(suggestSource);
 
     }
 

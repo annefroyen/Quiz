@@ -21,7 +21,7 @@ public class Add extends AppCompatActivity {
     TextView sjekk;
 
     //Database database = new Database();
-   // ArrayList<Person> personList = database.getPersonList();
+    ArrayList<Person> personList;
    // int [] image_list = database.getImage_list();
 
     Person person;
@@ -46,6 +46,13 @@ public class Add extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
 
+
+
+
+
+
+
+       // System.out.print("funker det?" + data.getPersonList().size());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
@@ -103,7 +110,7 @@ public class Add extends AppCompatActivity {
                     name = editName.getText().toString();
                     newPerson = new Person(uri, name);
                     sjekk.setText("ny person: "+ name + uri);
-                   Database.addPerson(newPerson);
+                     //addPerson(newPerson);
                 }
             });
         }

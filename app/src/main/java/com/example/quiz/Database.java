@@ -12,27 +12,13 @@ import java.util.*;
 
 public class Database extends AppCompatActivity {
 
-  private static ArrayList<Person> personList;
-
-   Add add = new Add();
-
-    int[] image_list = {
-            R.drawable.joey,
-            R.drawable.ross,
-            R.drawable.rachel,
-            R.drawable.chandler,
-            R.drawable.phoebe,
-            R.drawable.monica,
-    };
-
     public Button nextButton;
     public Button addButton;
     public Button prevButton;
     public Button exitButton;
 
-    public ArrayList<Person> getPersonList() {
-        return personList;
-    }
+    ArrayList<Person> personList;
+
 
     public Button deleteButton;
     public ImageView iv_image;
@@ -41,28 +27,20 @@ public class Database extends AppCompatActivity {
     int i = 0;
 
     public Database() {
-        personList = new ArrayList<Person>();
 
     }
 
-
-    public int[] getImage_list() {
-        return image_list;
-    }
-
-    public static  boolean addPerson(Person person){
-        personList.add(person);
-        return true;
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
-        //personList = new ArrayList<>();
-        //Database database = new Database(personList);
-        makeList();
+
+        Data data = new Data();
+       // personList = data.getPersonList();
+        data.makeList();
+
+        System.out.print("Funker det?" + data.getPersonList().size());
 
 
 
@@ -138,7 +116,7 @@ public class Database extends AppCompatActivity {
 
 
         //henter ut bilde
-       Uri currentUri = currentPerson.getUri();
+        Uri currentUri = currentPerson.getUri();
         iv_image.setImageURI(currentUri);
 
 
@@ -147,24 +125,5 @@ public class Database extends AppCompatActivity {
         tv_name.setText(name);
     }
 
-    public void makeList(){
-        //lage personer
-        Uri joeyUri = Uri.parse("android.resource://com.example.quiz/drawable/joey");
-        Person joey = new Person(joeyUri, "joey");
 
-        Uri chandlerUri = Uri.parse("android.resource://com.example.quiz/drawable/chandler");
-        Person chandler = new Person(chandlerUri, "chandler");
-
-        Uri rachelUri = Uri.parse("android.resource://com.example.quiz/drawable/rachel");
-        Person rachel = new Person(rachelUri, "rachel");
-
-        Person addPerson = add.getPerson();
-        if(addPerson != null){
-            personList.add(addPerson);
-        }
-
-       personList.add(joey);
-       personList.add(chandler);
-       personList.add(rachel);
-    }
 }
