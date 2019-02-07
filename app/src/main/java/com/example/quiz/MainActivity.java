@@ -1,10 +1,13 @@
 package com.example.quiz;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,10 +16,15 @@ public class MainActivity extends AppCompatActivity {
     private Button addButton;
     private Button databaseButton;
 
+    List<Person> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        list = ((App)getApplicationContext()).getOurDAO().getAll();
+        Person newPerson = new Person("android.resource://com.example.quiz/drawable/joey", "joey");
+        list.add(newPerson);
 
 
         quizButton = findViewById(R.id.quizButton);
@@ -42,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 goToDatabase();
             }
         });
+
+
+
+
     }
 
     public void goToQuiz (){

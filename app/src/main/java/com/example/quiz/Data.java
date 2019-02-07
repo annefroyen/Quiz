@@ -31,18 +31,18 @@ public class Data {
     public void makeList(){
         //lage personer
         Uri joeyUri = Uri.parse("android.resource://com.example.quiz/drawable/joey");
-        Person joey = new Person(joeyUri, "joey");
+        //Person joey = new Person(joeyUri, "joey");
 
         Uri chandlerUri = Uri.parse("android.resource://com.example.quiz/drawable/chandler");
-        Person chandler = new Person(chandlerUri, "chandler");
+        //Person chandler = new Person(chandlerUri, "chandler");
 
         Uri rachelUri = Uri.parse("android.resource://com.example.quiz/drawable/rachel");
-        Person rachel = new Person(rachelUri, "rachel");
+        //Person rachel = new Person(rachelUri, "rachel");
 
-        System.out.print(rachel.getUri() + rachel.getName());
+        //System.out.print(rachel.getUri() + rachel.getName());
 
 
-        personList.add(rachel);
+       // personList.add(rachel);
        // personList.add(chandler);
        // personList.add(rachel);
     }

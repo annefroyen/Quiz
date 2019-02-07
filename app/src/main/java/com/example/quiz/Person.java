@@ -1,18 +1,29 @@
 package com.example.quiz;
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 
-public class Person extends AppCompatActivity {
+@Entity(tableName = "people")
+public class Person {
 
-    private Uri uri;
-    private String name;
+    @PrimaryKey(autoGenerate = true)
+    public int id;
 
-    public Person(Uri uri, String name){
-        this.uri =uri;
-        this.name=name;
+    @ColumnInfo(name = "name")
+    public String name;
+
+    @ColumnInfo(name = "uri")
+    public String uri;
+
+
+    public Person(String uri, String name) {
+        this.uri = uri;
+        this.name = name;
     }
 
-    public Uri getUri() {
+    public String getUri() {
         return uri;
     }
 
@@ -20,6 +31,6 @@ public class Person extends AppCompatActivity {
         return name;
     }
 
-    public Person() {
-    }
+  
+
 }

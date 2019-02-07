@@ -1,5 +1,6 @@
 package com.example.quiz;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,14 +18,12 @@ public class Database extends AppCompatActivity {
     public Button prevButton;
     public Button exitButton;
 
-    ArrayList<Person> personList;
-
-
     public Button deleteButton;
     public ImageView iv_image;
     public TextView tv_name;
     String name;
     int i = 0;
+    List<Person> list;
 
     public Database() {
 
@@ -36,13 +35,7 @@ public class Database extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
 
-        Data data = new Data();
-       // personList = data.getPersonList();
-        data.makeList();
-
-        System.out.print("Funker det?" + data.getPersonList().size());
-
-
+        list = ((App) getApplicationContext()).getOurDAO().getAll();
 
         addButton = (Button) findViewById(R.id.addButton);
         nextButton = (Button) findViewById(R.id.nextButton);
@@ -66,8 +59,6 @@ public class Database extends AppCompatActivity {
                 //DELETE PERSON
                 //image_list
                 //personList.remove()
-
-
             }
         });
 
@@ -84,16 +75,17 @@ public class Database extends AppCompatActivity {
     }
 
     private void initView() {
+
         setupList(0);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 i++;
-                if (i > personList.size() - 1) {
+                if (i > list.size() - 1) {
                     i = 0;
                 }
-                setupList(i);
+               setupList(i);
 
             }
         });
@@ -103,27 +95,26 @@ public class Database extends AppCompatActivity {
             public void onClick(View v) {
                 i--;
                 if (i < 0) {
-                    i = personList.size() - 1;
+                    i = list.size() - 1;
                 }
-                setupList(i);
+               setupList(i);
             }
         });
     }
 
     private void setupList(int i) {
-        //henter ut person
-       Person currentPerson =  personList.get(i);
 
+        Person currentPerson = list.get(i);
 
         //henter ut bilde
-        Uri currentUri = currentPerson.getUri();
-        iv_image.setImageURI(currentUri);
+        String currentUri = currentPerson.getUri();
+        Uri uri = Uri.parse(currentUri);
+        iv_image.setImageURI(uri);
 
 
         //henter ut navn
         name = currentPerson.getName();
         tv_name.setText(name);
     }
-
 
 }
