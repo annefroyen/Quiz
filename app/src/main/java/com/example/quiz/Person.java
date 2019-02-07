@@ -3,7 +3,6 @@ package com.example.quiz;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.net.Uri;
 
 @Entity(tableName = "people")
 public class Person {
@@ -30,7 +29,5 @@ public class Person {
     public String getName() {
         return name;
     }
-
-  
 
 }

@@ -1,6 +1,5 @@
 package com.example.quiz;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -9,44 +8,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.example.quiz.Database.App;
 
-public class Add extends AppCompatActivity {
 
-    ImageView add_imageView;
-    Button captureButton, cancelButton, saveButton;
-    EditText editName;
-    TextView sjekk;
+public class AddActivity extends AppCompatActivity {
 
-    //Database database = new Database();
-    ArrayList<Person> personList;
-   // int [] image_list = database.getImage_list();
-
-    Person person;
-    int RC_PHOTO_PICKER =1;
-
-    public Add(Person person){
-        this.person=person;
-    }
+    private ImageView add_imageView;
+    private Button captureButton, exitButton, saveButton;
+    private EditText editName;
 
     private Person newPerson;
     private String name;
     private Uri uri;
 
-    public Add() {
+    private int RC_PHOTO_PICKER =1;
+
+    public AddActivity() {
     }
 
-    public Person getPerson() {
-        return person;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-       // System.out.print("funker det?" + data.getPersonList().size());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
@@ -60,10 +45,10 @@ public class Add extends AppCompatActivity {
             }
         });
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Add.this, MainActivity.class);
+                Intent intent = new Intent(AddActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -73,10 +58,9 @@ public class Add extends AppCompatActivity {
     private void init() {
         add_imageView = (ImageView) findViewById(R.id.add_imageView);
         captureButton = (Button) findViewById(R.id.captureButton);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
+        exitButton = (Button) findViewById(R.id.exitButton);
         saveButton = (Button) findViewById(R.id.saveButton);
         editName = (EditText) findViewById(R.id.editName);
-        sjekk = (TextView) findViewById(R.id.sjekk);
     }
 
     private void openPhotoPicker() {
@@ -93,16 +77,14 @@ public class Add extends AppCompatActivity {
 
             uri = data.getData();
             add_imageView.setImageURI(uri);
+            name = editName.getText().toString();
+            newPerson = new Person(uri.toString(), name);
 
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    name = editName.getText().toString();
-                    newPerson = new Person(uri.toString(), name);
-                    sjekk.setText("ny person: "+ name + uri);
-
                     ((App)getApplicationContext()).getOurDAO().insert(newPerson);
+                    Toast.makeText(getApplicationContext(),"Person added!",Toast.LENGTH_SHORT).show();
                 }
             });
         }

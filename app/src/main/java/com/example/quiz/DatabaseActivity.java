@@ -1,6 +1,5 @@
 package com.example.quiz;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,26 +8,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.net.Uri;
+import android.widget.Toast;
+import com.example.quiz.Database.*;
+
 import java.util.*;
 
-public class Database extends AppCompatActivity {
+public class DatabaseActivity extends AppCompatActivity {
 
     public Button nextButton;
     public Button addButton;
     public Button prevButton;
     public Button exitButton;
-
     public Button deleteButton;
+
     public ImageView iv_image;
     public TextView tv_name;
-    String name;
+
     int i = 0;
     List<Person> list;
-
-    public Database() {
-
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +34,12 @@ public class Database extends AppCompatActivity {
 
         list = ((App) getApplicationContext()).getOurDAO().getAll();
 
-        addButton = (Button) findViewById(R.id.addButton);
-        nextButton = (Button) findViewById(R.id.nextButton);
-        exitButton = (Button) findViewById(R.id.exitButton);
-        deleteButton = (Button) findViewById(R.id.deleteButton);
-        prevButton = (Button) findViewById(R.id.prevButton);
-        tv_name = (TextView) findViewById(R.id.tv_name);
-        iv_image = (ImageView) findViewById(R.id.iv_image);
+        init();
 
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Database.this, MainActivity.class);
+                Intent intent = new Intent(DatabaseActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -56,9 +47,12 @@ public class Database extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //DELETE PERSON
-                //image_list
-                //personList.remove()
+               String name =  tv_name.getText().toString();
+               Person newPerson = ( (App)getApplicationContext()).getOurDAO().findByName(name);
+               ( (App)getApplicationContext()).getOurDAO().delete(newPerson);
+                Intent intent = new Intent(DatabaseActivity.this, DatabaseActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(),name + " deleted!",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -66,12 +60,23 @@ public class Database extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Database.this, Add.class);
+                Intent intent = new Intent(DatabaseActivity.this, AddActivity.class);
                 startActivity(intent);
             }
         });
 
         initView();
+    }
+
+    private void init(){
+        tv_name = (TextView) findViewById(R.id.tv_name);
+        iv_image = (ImageView) findViewById(R.id.iv_image);
+
+        addButton = (Button) findViewById(R.id.addButton);
+        nextButton = (Button) findViewById(R.id.nextButton);
+        exitButton = (Button) findViewById(R.id.exitButton);
+        deleteButton = (Button) findViewById(R.id.deleteButton);
+        prevButton = (Button) findViewById(R.id.prevButton);
     }
 
     private void initView() {
@@ -82,9 +87,7 @@ public class Database extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i++;
-                if (i > list.size() - 1) {
-                    i = 0;
-                }
+                if (i > list.size() - 1) { i = 0; }
                setupList(i);
 
             }
@@ -94,9 +97,7 @@ public class Database extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i--;
-                if (i < 0) {
-                    i = list.size() - 1;
-                }
+                if (i < 0) { i = list.size() - 1; }
                setupList(i);
             }
         });
@@ -104,6 +105,7 @@ public class Database extends AppCompatActivity {
 
     private void setupList(int i) {
 
+        //henter ut person
         Person currentPerson = list.get(i);
 
         //henter ut bilde
@@ -111,9 +113,8 @@ public class Database extends AppCompatActivity {
         Uri uri = Uri.parse(currentUri);
         iv_image.setImageURI(uri);
 
-
         //henter ut navn
-        name = currentPerson.getName();
+        String name = currentPerson.getName();
         tv_name.setText(name);
     }
 

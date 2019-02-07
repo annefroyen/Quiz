@@ -1,4 +1,4 @@
-package com.example.quiz;
+package com.example.quiz.Database;
 
 import android.app.Application;
 import android.arch.persistence.room.Room;

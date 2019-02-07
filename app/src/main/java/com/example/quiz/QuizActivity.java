@@ -11,22 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import com.example.quiz.Database.App;
 import java.util.List;
-import java.util.*;
 import java.util.Random;
 
-public class Quiz extends AppCompatActivity {
-    public List<String> suggestSource = new ArrayList<>();
-    public Button nextButton;
+public class QuizActivity extends AppCompatActivity {
+
+    public Button submitButton;
     public Button exitButton;
     public EditText et_answer;
     public TextView tv_score;
     public ImageView userImage;
 
 
-    public char[] answer;
     List<Person> list;
     String correct_answer;
     int score = 0;
@@ -41,29 +38,31 @@ public class Quiz extends AppCompatActivity {
 
         list = ((App) getApplicationContext()).getOurDAO().getAll();
 
-        nextButton = (Button) findViewById(R.id.nextButton);
-        exitButton = (Button) findViewById(R.id.exitButton);
-        exitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (Quiz.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
         et_answer = (EditText) findViewById(R.id.et_answer);
         tv_score = (TextView) findViewById(R.id.tv_score);
         userImage = (ImageView)findViewById(R.id.userImage);
+        submitButton = (Button) findViewById(R.id.submitButton);
+        exitButton = (Button) findViewById(R.id.exitButton);
+
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (QuizActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         initView();
     }
 
-   // Mediastore.media.getBitmap.this.getcontentResolver
 
     private void initView() {
 
        setupList();
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -98,22 +97,7 @@ public class Quiz extends AppCompatActivity {
         userImage.setImageURI(uri);
 
         //henter ut navn
-        String name = currentPerson.getName();
-        correct_answer = name;
-
-        //random
-
-       correct_answer = correct_answer.substring(correct_answer.lastIndexOf("/")+1);
-
-       answer = correct_answer.toCharArray();
-
-       suggestSource.clear();
-       for(char item:answer)
-       {
-            suggestSource.add(String.valueOf(item));
-        }
-        Collections.shuffle(suggestSource);
-
+        correct_answer = currentPerson.getName();
     }
 
 }

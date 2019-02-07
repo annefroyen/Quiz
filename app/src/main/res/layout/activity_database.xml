@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Database">
+    tools:context=".DatabaseActivity">
 
     <Button
         android:id="@+id/prevButton"
@@ -49,7 +49,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="NAME"
+        android:text="The database is empty"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/exitButton"

@@ -1,9 +1,11 @@
-package com.example.quiz;
+package com.example.quiz.Database;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+
+import com.example.quiz.Person;
 
 import java.util.List;
 
@@ -15,8 +17,8 @@ public interface UserDao {
     @Query("SELECT * FROM People WHERE id IN (:userIds)")
     List<Person> loadAllByIds(int[] userIds);
 
-    //@Query("SELECT * FROM person WHERE first_name LIKE :first AND " + "last_name LIKE :last LIMIT 1")
-    //Person findByName(String first, String last);
+    @Query("SELECT * FROM People WHERE name LIKE :name LIMIT 1")
+    Person findByName(String name);
 
     @Insert
     void insertAll(Person... person);
