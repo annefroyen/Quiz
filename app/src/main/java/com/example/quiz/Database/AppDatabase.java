@@ -5,7 +5,7 @@ import android.arch.persistence.room.Database;
 
 import com.example.quiz.Person;
 
-@Database(entities = {Person.class}, version = 1)
+@Database(entities = {Person.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
 }
