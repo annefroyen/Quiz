@@ -2,9 +2,6 @@ package com.example.quiz;
 
 import android.support.test.filters.LargeTest;
 
-
-
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +9,7 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.rule.ActivityTestRule;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 
@@ -27,7 +25,7 @@ public class MainActivityTest {
         onView(withId(R.id.ownerDialog)).perform((typeText("Maria")));
         onView(withId(R.id.databaseButton)).perform(click());
 
-        onView(withId(R.id.captureButton).perform(click());
+        //onView(withId(R.id.captureButton).perform(click());
     }
 
     @Test
