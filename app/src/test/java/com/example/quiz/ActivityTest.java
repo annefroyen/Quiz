@@ -1,9 +1,10 @@
 
 package com.example.quiz;
 
-import android.widget.Toast;
-import com.example.quiz.Database.*;
-import com.example.quiz.Database.App;
+import org.junit.Rule;
+
+//import com.google.common.truth.Truth.assertThat;
+import org.junit.Test;
 import org.junit.Test;
 import com.example.quiz.Database.App;
 import org.junit.Test;
@@ -14,17 +15,39 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
-import static org.mockito.Mockito.when;
 import static org.junit.Assert.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class ActivityTest {
 
-    @Mock
-    Context mMockContext;
+   // @Mock
+    //Context mMockContext;
 
 
+    //@Rule
+    //public ActivityTestRule<AddActivity> mActivityRule = new ActivityTestRule<>(AddActivity.class);
+
+
+    @Test
+    public void addPerson() {
+       // onView(withId(R.id.editName)).perform((typeText("Maria")));
+
+       // onView(withId(R.id.add_imageView)).perform(typeText("uri"));
+
+        //.onView(withId(R.id.addButton)).perform(click());
+    }
+
+    @Test
+    public void deletePerson() {
+        //Espresso.onView(withId(R.id.editName)).perform((typeText("Maria")));
+
+
+       // onView(withId(R.id.editName)).perform(typeText("Steve"));
+        // onView(withId(R.id.add_imageView)).perform(typeText("uri"));
+        //onView(withId(R.id.deleteButton)).perform(click());
+    }
+
+
+/*
     @Test
     public void PersonTest(){
 
@@ -51,11 +74,11 @@ public class ActivityTest {
         newList = ((App)mMockContext).getOurDAO().getAll();
         assertTrue(list.size() == newList.size());
     }
+    */
 
     int  score =0;
     int total = 0;
     String submit;
-
 
     @Test
     public void scoreTest(){

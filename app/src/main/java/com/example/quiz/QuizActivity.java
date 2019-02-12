@@ -82,7 +82,7 @@ public class QuizActivity extends AppCompatActivity {
         //henter ut bilde
         String currentUri = currentPerson.getUri();
         Uri uri = Uri.parse(currentUri);
-        userImage.setImageURI(uri);
+       userImage.setImageURI(uri);
 
         //henter ut navn
         correct_answer = currentPerson.getName();

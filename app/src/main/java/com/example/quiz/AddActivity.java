@@ -1,7 +1,10 @@
 package com.example.quiz;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,11 +47,12 @@ public class AddActivity extends AppCompatActivity {
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                photoPickerIntent.setType("image/*");
-                photoPickerIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, false);
-                startActivityForResult(Intent.createChooser(photoPickerIntent,"Complete Action Using"), PHOTO_PICKER);
-                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), PHOTO_PICKER);
+                Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+               // photoPickerIntent.setType("image/*");
+                //photoPickerIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, false);
+               // startActivityForResult(Intent.createChooser(photoPickerIntent,"Complete Action Using"), PHOTO_PICKER);
+                startActivityForResult(galleryIntent, PHOTO_PICKER);
             }
         });
 
@@ -70,6 +74,7 @@ public class AddActivity extends AppCompatActivity {
 
             uri = data.getData();
             add_imageView.setImageURI(uri);
+
 
 
             saveButton.setOnClickListener(new View.OnClickListener() {
