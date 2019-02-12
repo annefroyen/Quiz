@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        addFriends();
+        //addFriends();
 
         init();
 
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        //editor.putBoolean("firstStart", false);
+        editor.putBoolean("firstStart", false);
         editor.apply();
     }
 
