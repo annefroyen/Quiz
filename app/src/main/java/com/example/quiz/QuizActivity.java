@@ -23,36 +23,24 @@ public class QuizActivity extends AppCompatActivity {
     public TextView tv_score;
     public ImageView userImage;
 
-
     List<Person> list;
     String correct_answer;
     int score = 0;
     int total = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         list = ((App) getApplicationContext()).getOurDAO().getAll();
-
-
 
         et_answer = (EditText) findViewById(R.id.et_answer);
         tv_score = (TextView) findViewById(R.id.tv_score);
         userImage = (ImageView)findViewById(R.id.userImage);
         submitButton = (Button) findViewById(R.id.submitButton);
-        exitButton = (Button) findViewById(R.id.exitButton);
-
-        exitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (QuizActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
         initView();
     }

@@ -28,5 +28,7 @@ public interface UserDao {
 
     @Delete
     void delete(Person person);
+
+
 }
 

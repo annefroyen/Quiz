@@ -32,17 +32,10 @@ public class DatabaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         list = ((App) getApplicationContext()).getOurDAO().getAll();
 
         init();
-
-        exitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DatabaseActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +67,6 @@ public class DatabaseActivity extends AppCompatActivity {
 
         addButton = (Button) findViewById(R.id.addButton);
         nextButton = (Button) findViewById(R.id.nextButton);
-        exitButton = (Button) findViewById(R.id.exitButton);
         deleteButton = (Button) findViewById(R.id.deleteButton);
         prevButton = (Button) findViewById(R.id.prevButton);
     }
