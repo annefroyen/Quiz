@@ -22,10 +22,8 @@ public class MainActivityTest {
 
     @Test
     public void dialogTest() {
-        onView(withId(R.id.ownerDialog)).perform((typeText("Maria")));
+        onView(withId(R.id.ownerDialog)).perform((typeText("Bill Gates")));
         onView(withId(R.id.databaseButton)).perform(click());
-
-        //onView(withId(R.id.captureButton).perform(click());
     }
 
     @Test

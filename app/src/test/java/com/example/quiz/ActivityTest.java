@@ -76,37 +76,4 @@ public class ActivityTest {
     }
     */
 
-    int  score =0;
-    int total = 0;
-    String submit;
-
-    @Test
-    public void scoreTest(){
-
-        //submit wrong answer
-        submit = "chandler";
-        boolean n = submit.toLowerCase().equals("joey".toLowerCase());
-        if(n){
-            score ++;
-            total ++;
-        }else{
-            total++;
-        }
-
-        assertTrue(score==0);
-        assertTrue(total==1);
-
-        //submit right answer
-        boolean m = submit.toLowerCase().equals("chandler".toLowerCase());
-        if(m){
-            score ++;
-            total ++;
-        }else{
-            total++;
-        }
-
-        assertTrue(score==1);
-        assertTrue(total==2);
-
-    }
 }

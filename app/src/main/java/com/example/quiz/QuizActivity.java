@@ -18,12 +18,20 @@ import java.util.Random;
 public class QuizActivity extends AppCompatActivity {
 
     public Button submitButton;
-    public Button exitButton;
     public EditText et_answer;
     public TextView tv_score;
     public ImageView userImage;
 
     List<Person> list;
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
     String correct_answer;
     int score = 0;
     int total = 0;
