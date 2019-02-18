@@ -1,5 +1,7 @@
 package com.example.quiz;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.test.filters.LargeTest;
 import android.view.View;
 import android.widget.EditText;
@@ -11,11 +13,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
+
+import java.util.List;
+
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -28,21 +34,20 @@ public class QuizActivityTest {
     @Rule
     public ActivityTestRule<QuizActivity> mActivityRule = new ActivityTestRule<>(QuizActivity.class);
 
-
     @Test
-    public void correctAnswerTest() {
-        Person correctPerson = ((App)getApplicationContext()).getOurDAO().findByName("joey");
-        //set person??
-        onView(withId(R.id.et_answer)).perform((typeText("joey")));
+    public void correctAnswerTest() throws InterruptedException {
+        QuizActivity activity  =  mActivityRule.getActivity();
+        String correct =   activity.getCorrect_answer();
+        onView(withId(R.id.et_answer)).perform((typeText(correct))).perform(closeSoftKeyboard());
+        Thread.sleep(250);
         onView(withId(R.id.submitButton)).perform(click());
         onView(withId(R.id.tv_score)).check(matches(hasValueEqualTo("1/1")));
     }
 
     @Test
-    public void incorrectAnswerTest(){
-        Person correctPerson = ((App)getApplicationContext()).getOurDAO().findByName("joey");
-        //set person??
-        onView(withId(R.id.et_answer)).perform((typeText("notJoey")));
+    public void incorrectAnswerTest() throws InterruptedException {
+        onView(withId(R.id.et_answer)).perform((typeText("incorrect"))).perform(closeSoftKeyboard());
+        Thread.sleep(250);
         onView(withId(R.id.submitButton)).perform(click());
         onView(withId(R.id.tv_score)).check(matches(hasValueEqualTo("0/1")));
     }
@@ -56,10 +61,6 @@ public class QuizActivityTest {
 
             }
 
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Has EditText/TextView the value:  " + content);
-            }
 
             @Override
             public boolean matchesSafely(View view) {
@@ -79,5 +80,7 @@ public class QuizActivityTest {
             }
         };
     }
+
+
 
 }

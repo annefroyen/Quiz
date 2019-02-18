@@ -23,6 +23,8 @@ public class DatabaseActivity extends AppCompatActivity {
 
     public ImageView iv_image;
     public TextView tv_name;
+    private TextView number;
+    private String size;
 
     int i = 0;
     List<Person> list;
@@ -34,6 +36,7 @@ public class DatabaseActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         list = ((App) getApplicationContext()).getOurDAO().getAll();
+
 
         init();
 
@@ -64,11 +67,11 @@ public class DatabaseActivity extends AppCompatActivity {
     private void init(){
         tv_name = (TextView) findViewById(R.id.tv_name);
         iv_image = (ImageView) findViewById(R.id.iv_image);
-
         addButton = (Button) findViewById(R.id.addButton);
         nextButton = (Button) findViewById(R.id.nextButton);
         deleteButton = (Button) findViewById(R.id.deleteButton);
         prevButton = (Button) findViewById(R.id.prevButton);
+        number = (TextView) findViewById(R.id.number);
     }
 
     private void initView() {
@@ -108,6 +111,14 @@ public class DatabaseActivity extends AppCompatActivity {
         //henter ut navn
         String name = currentPerson.getName();
         tv_name.setText(name);
+
+
+        //setter størrelse
+        size = Integer.toString(list.size());
+        number.setText(size);
     }
 
+    public String getTheSize() {
+        return size;
+    }
 }

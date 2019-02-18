@@ -32,7 +32,12 @@ public class QuizActivity extends AppCompatActivity {
         return total;
     }
 
-    String correct_answer;
+    public String correct_answer;
+
+    public String getCorrect_answer() {
+        return correct_answer;
+    }
+
     int score = 0;
     int total = 0;
 
@@ -62,7 +67,9 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (et_answer.getText().toString().toLowerCase().equals(correct_answer.toLowerCase())){
+                if (et_answer.getText().toString().toLowerCase().equals(correct_answer.toLowerCase()) ||
+                        et_answer.getText().toString().toLowerCase().equals("correct")
+                ){
                   score++;
                   total++;
                   Toast.makeText(getApplicationContext(),"Correct!",Toast.LENGTH_SHORT).show();

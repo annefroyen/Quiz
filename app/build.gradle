@@ -4,6 +4,7 @@ android {
 
     testOptions {
         unitTests.includeAndroidResources = true
+        animationsDisabled = true
     }
     compileSdkVersion 28
     defaultConfig {
@@ -50,7 +51,7 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
 
 
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.0'
 }
