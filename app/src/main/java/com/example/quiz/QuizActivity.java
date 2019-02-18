@@ -67,9 +67,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (et_answer.getText().toString().toLowerCase().equals(correct_answer.toLowerCase()) ||
-                        et_answer.getText().toString().toLowerCase().equals("correct")
-                ){
+                if (et_answer.getText().toString().toLowerCase().equals(correct_answer.toLowerCase())){
                   score++;
                   total++;
                   Toast.makeText(getApplicationContext(),"Correct!",Toast.LENGTH_SHORT).show();
