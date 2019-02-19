@@ -47,21 +47,15 @@ public class AddActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
         init();
 
         captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-               // photoPickerIntent.setType("image/*");
-                //photoPickerIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, false);
-               // startActivityForResult(Intent.createChooser(photoPickerIntent,"Complete Action Using"), PHOTO_PICKER);
                 startActivityForResult(galleryIntent, PHOTO_PICKER);
             }
         });
-
 
     }
 
@@ -82,13 +76,13 @@ public class AddActivity extends AppCompatActivity {
             uri = data.getData();
             add_imageView.setImageURI(uri);
 
-
-
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     name = editName.getText().toString();
                     newPerson = new Person(uri.toString(), name);
+
+                    Log.d("tomt",uri.toString());
 
                     ((App)getApplicationContext()).getOurDAO().insert(newPerson);
 
