@@ -55,7 +55,7 @@ public class MainActivityTest {
         onView(withId(R.id.databaseButton)).perform(click());
         onView(withId(R.id.number));
 
-        onView(withId(R.id.number)).check(matches(hasValueEqualTo("2")));
+        onView(withId(R.id.number)).check(matches(hasValueEqualTo("3")));
 
     }
 
